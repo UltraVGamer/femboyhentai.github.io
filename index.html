@@ -354,11 +354,404 @@
             color-scheme: normal;
         }
 
+        .xp-notification {
+            position: fixed;
+            z-index: 20;
+            right: 16px;
+            bottom: 18px;
+            left: 16px;
+            width: min(390px, calc(100% - 32px));
+            margin: auto;
+            padding: 8px 12px 10px;
+            border: 2px solid #111;
+            background: #191919;
+            color: #fff;
+            font: bold 12px Arial, sans-serif;
+            text-align: center;
+            box-shadow: 0 0 10px #000;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: opacity 180ms ease, transform 180ms ease;
+            visibility: hidden;
+        }
+
+        .xp-notification.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .xp-battery {
+            display: grid;
+            height: 18px;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 3px;
+            margin-top: 6px;
+            padding: 3px;
+            border: 2px solid #aaa;
+            background: #080808;
+        }
+
+        .xp-battery-segment {
+            border-right: 2px solid #080808;
+            background: #292929;
+        }
+
+        .xp-battery-segment:last-child {
+            border-right: 0;
+        }
+
+        .xp-battery-segment.is-filled {
+            background: var(--accent-color);
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+
         footer {
             margin-top: 20px;
             color: #888;
             font-family: Georgia, serif;
             text-align: center;
+        }
+
+        :root {
+            --page-bg: #222;
+            --panel-bg: #333;
+            --box-bg: #444;
+            --card-bg: #333;
+            --field-bg: #111;
+            --text-color: #fff;
+            --secondary-text: #eee;
+            --muted-text: #888;
+            --accent-color: #00ff00;
+            --accent-secondary: #00ccff;
+            --border-color: #777;
+            --button-start: #00ccff;
+            --button-end: #0066ff;
+            --button-border: #003399;
+            --hover-color: #009900;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            color: var(--text-color);
+        }
+
+        .container,
+        .viewer-window {
+            border-color: var(--field-bg);
+            background: var(--panel-bg);
+        }
+
+        h1,
+        .search-label,
+        .sort-label {
+            color: var(--accent-color);
+        }
+
+        h2,
+        .game-genre,
+        #catalog-status {
+            border-color: var(--accent-secondary);
+            color: var(--accent-secondary);
+        }
+
+        p {
+            color: var(--secondary-text);
+        }
+
+        .box {
+            border-color: var(--border-color);
+            background: var(--box-bg);
+            color: var(--text-color);
+        }
+
+        .game-card {
+            border-color: var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        #game-search,
+        #game-sort {
+            border-color: var(--accent-secondary);
+            background: var(--field-bg);
+            color: var(--text-color);
+        }
+
+        #game-search:focus {
+            outline-color: var(--accent-color);
+        }
+
+        .genre-filter {
+            border-color: var(--accent-secondary);
+            background: var(--page-bg);
+            color: var(--text-color);
+        }
+
+        #toggle-all-genres {
+            border-color: var(--button-border);
+            background: var(--page-bg);
+            color: var(--accent-secondary);
+        }
+
+        .game-list {
+            border-color: var(--field-bg);
+            background: var(--page-bg);
+            scrollbar-color: var(--accent-secondary) var(--field-bg);
+        }
+
+        .more-games,
+        .viewer-header button {
+            border-color: var(--button-border);
+            background: linear-gradient(var(--button-start), var(--button-end));
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .more-games {
+            cursor: pointer;
+        }
+
+        .more-games:hover,
+        .more-games:focus-visible,
+        .viewer-header button:hover {
+            background: linear-gradient(var(--accent-color), var(--hover-color));
+        }
+
+        .game-card:hover,
+        .game-card:focus-visible {
+            border-color: var(--accent-color);
+            background: var(--box-bg);
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+        .game-genre {
+            border-color: var(--accent-secondary);
+        }
+
+        .viewer-header {
+            border-color: var(--accent-secondary);
+            background: var(--field-bg);
+            color: var(--accent-color);
+        }
+
+        #viewer-status {
+            color: var(--accent-secondary);
+        }
+
+        #no-results {
+            color: var(--accent-secondary);
+        }
+
+        #viewer-frame {
+            background: var(--field-bg);
+        }
+
+        footer {
+            color: var(--muted-text);
+        }
+
+        .level-dialog {
+            width: min(560px, calc(100% - 24px));
+            max-height: min(80vh, 700px);
+            padding: 20px;
+            border: 3px solid var(--accent-secondary);
+            background: var(--panel-bg);
+            color: var(--text-color);
+            box-shadow: 0 0 20px #000;
+        }
+
+        .level-dialog::backdrop {
+            background: rgb(0 0 0 / 75%);
+        }
+
+        .level-dialog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .level-dialog h2 {
+            margin: 0;
+        }
+
+        .level-close {
+            padding: 6px 11px;
+            border: 2px solid var(--button-border);
+            background: linear-gradient(var(--button-start), var(--button-end));
+            color: var(--text-color);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #level-summary {
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        #level-progress {
+            margin-top: 0;
+            color: var(--accent-secondary);
+        }
+
+        .theme-list {
+            display: grid;
+            max-height: 42vh;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 8px;
+            overflow-y: auto;
+        }
+
+        .theme-option {
+            min-height: 42px;
+            padding: 8px;
+            border: 2px solid var(--option-accent);
+            background: var(--option-bg);
+            color: var(--option-text);
+            font: inherit;
+            font-weight: bold;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .theme-option[data-theme-id="aero"] {
+            grid-column: span 2;
+        }
+
+        .theme-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+
+        .theme-option[aria-pressed="true"] {
+            outline: 2px solid var(--option-accent);
+            outline-offset: 2px;
+        }
+
+        .theme-option:not(:disabled):hover,
+        .theme-option:not(:disabled):focus-visible {
+            filter: brightness(1.2);
+        }
+
+        body[data-theme="aero"] {
+            background:
+                radial-gradient(ellipse at 12% 8%, rgb(73 204 226 / 58%), transparent 34%),
+                radial-gradient(ellipse at 88% 18%, rgb(229 167 49 / 39%), transparent 30%),
+                linear-gradient(145deg, #117b9f, #075ab5 55%, #382294);
+            background-attachment: fixed;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        }
+
+        body[data-theme="aero"] .container,
+        body[data-theme="aero"] .viewer-window,
+        body[data-theme="aero"] .level-dialog {
+            border: 1px solid rgb(255 255 255 / 76%);
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgb(165 216 232 / 82%), rgb(48 125 185 / 76%));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 94%), 0 14px 36px rgb(3 35 108 / 42%), 0 0 20px rgb(91 246 255 / 48%);
+            backdrop-filter: blur(20px) saturate(185%);
+            -webkit-backdrop-filter: blur(20px) saturate(185%);
+        }
+
+        body[data-theme="aero"] .box {
+            border: 1px solid rgb(255 255 255 / 82%);
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgb(177 222 235 / 82%), rgb(54 142 191 / 70%));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 88%), 0 6px 16px rgb(3 35 108 / 22%);
+            backdrop-filter: blur(14px) saturate(175%);
+            -webkit-backdrop-filter: blur(14px) saturate(175%);
+        }
+
+        body[data-theme="aero"] .game-card,
+        body[data-theme="aero"] .theme-option {
+            border: 1px solid rgb(255 255 255 / 86%);
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgb(184 226 237 / 84%), rgb(56 143 190 / 75%));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 90%), 0 4px 10px rgb(3 35 108 / 24%);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+        }
+
+        body[data-theme="aero"] .game-list {
+            border: 1px solid rgb(255 255 255 / 86%);
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgb(4 75 153 / 68%), rgb(18 32 118 / 64%));
+            box-shadow: inset 0 2px 12px rgb(3 35 108 / 35%), 0 1px 0 rgb(255 255 255 / 72%);
+            backdrop-filter: blur(12px) saturate(185%);
+            -webkit-backdrop-filter: blur(12px) saturate(185%);
+        }
+
+        body[data-theme="aero"] #game-search,
+        body[data-theme="aero"] #game-sort {
+            border: 1px solid rgb(255 255 255 / 92%);
+            border-radius: 8px;
+            background: linear-gradient(180deg, rgb(216 240 247 / 96%), rgb(140 195 220 / 91%));
+            box-shadow: inset 0 1px 3px rgb(3 35 108 / 28%), 0 1px 0 rgb(255 255 255 / 85%);
+        }
+
+        body[data-theme="aero"] .genre-filter,
+        body[data-theme="aero"] #toggle-all-genres,
+        body[data-theme="aero"] .more-games,
+        body[data-theme="aero"] .viewer-header button,
+        body[data-theme="aero"] .level-close {
+            border: 1px solid rgb(255 255 255 / 88%);
+            border-radius: 8px;
+            background: linear-gradient(145deg, rgb(0 239 255 / 94%), rgb(23 104 255 / 95%));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 88%), 0 4px 10px rgb(3 35 108 / 30%);
+            text-shadow: 0 1px 2px rgb(0 33 91 / 55%);
+        }
+
+        body[data-theme="aero"] .more-games:hover,
+        body[data-theme="aero"] .more-games:focus-visible,
+        body[data-theme="aero"] .viewer-header button:hover,
+        body[data-theme="aero"] .genre-filter:hover,
+        body[data-theme="aero"] .genre-filter:focus-visible,
+        body[data-theme="aero"] #toggle-all-genres:hover,
+        body[data-theme="aero"] #toggle-all-genres:focus-visible {
+            background: linear-gradient(145deg, #ffef35, #ff48bd);
+            filter: saturate(1.25);
+        }
+
+        body[data-theme="aero"] .game-card:hover,
+        body[data-theme="aero"] .game-card:focus-visible {
+            background: linear-gradient(145deg, rgb(255 255 255 / 90%), rgb(87 239 255 / 75%));
+            box-shadow: 0 0 16px rgb(0 255 255 / 82%), inset 0 1px 0 rgb(255 255 255 / 96%);
+        }
+
+        body[data-theme="aero"] .viewer-header {
+            border-bottom: 1px solid rgb(255 255 255 / 85%);
+            background: linear-gradient(180deg, rgb(235 252 255 / 90%), rgb(112 203 255 / 70%));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 95%);
+            backdrop-filter: blur(16px) saturate(185%);
+            -webkit-backdrop-filter: blur(16px) saturate(185%);
+        }
+
+        body[data-theme="aero"] .xp-notification {
+            border: 1px solid rgb(255 255 255 / 88%);
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgb(165 216 232 / 94%), rgb(48 125 185 / 88%));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 94%), 0 8px 24px rgb(3 35 108 / 44%), 0 0 16px rgb(91 246 255 / 62%);
+            backdrop-filter: blur(16px) saturate(190%);
+            -webkit-backdrop-filter: blur(16px) saturate(190%);
+        }
+
+        body[data-theme="aero"] .xp-battery {
+            border-color: rgb(255 255 255 / 95%);
+            border-radius: 6px;
+            background: rgb(4 46 116 / 78%);
+        }
+
+        body[data-theme="aero"] .xp-battery-segment {
+            border-color: rgb(4 46 116 / 90%);
+            background: rgb(10 62 124 / 62%);
+        }
+
+        body[data-theme="aero"] .xp-battery-segment.is-filled {
+            background: #ffbd38;
+            box-shadow: 0 0 7px #ffbd38;
         }
 
         @media (max-width: 520px) {
@@ -449,6 +842,7 @@
     <section class="box" aria-labelledby="games-heading">
         <h2 id="games-heading">Games</h2>
         <a class="more-games" href="https://ultravgamer.site" target="_blank" rel="noopener noreferrer">Made by UltraVGamer</a>
+        <button class="more-games" id="open-level-dialog" type="button">Levels & Themes</button>
         <p id="game-count" aria-live="polite">Loading online games...</p>
         <p id="catalog-status" role="status"></p>
         <div class="game-list" id="game-list">
@@ -494,6 +888,20 @@
 
     <footer>FemboyHentai.Store</footer>
 </main>
+<dialog class="level-dialog" id="level-dialog" aria-labelledby="level-heading">
+    <div class="level-dialog-header">
+        <h2 id="level-heading">Level &amp; Themes</h2>
+        <button class="level-close" id="close-level-dialog" type="button" aria-label="Close level and themes">×</button>
+    </div>
+    <p id="level-summary" aria-live="polite"></p>
+    <p id="level-progress"></p>
+    <p>Earn 1 XP for every 5 minutes the site is open. Every 5 XP earns a level.</p>
+    <div class="theme-list" id="theme-list" aria-label="Site themes"></div>
+</dialog>
+<div class="xp-notification" id="xp-notification" role="status" aria-live="polite" aria-hidden="true">
+    <span id="xp-notification-label"></span>
+    <div class="xp-battery" id="xp-battery" role="img"></div>
+</div>
 <div class="viewer-overlay" id="viewer-overlay" role="dialog" aria-modal="true" aria-labelledby="viewer-title">
     <div class="viewer-window" id="viewer-window">
         <div class="viewer-header">
@@ -529,8 +937,42 @@
     const menuHomeButton = document.getElementById("menu-home");
     const toggleFullscreenButton = document.getElementById("toggle-fullscreen");
     const openGameTabButton = document.getElementById("open-game-tab");
+    const levelDialog = document.getElementById("level-dialog");
+    const openLevelDialogButton = document.getElementById("open-level-dialog");
+    const closeLevelDialogButton = document.getElementById("close-level-dialog");
+    const levelSummary = document.getElementById("level-summary");
+    const levelProgress = document.getElementById("level-progress");
+    const themeList = document.getElementById("theme-list");
+    const xpNotification = document.getElementById("xp-notification");
+    const xpNotificationLabel = document.getElementById("xp-notification-label");
+    const xpBattery = document.getElementById("xp-battery");
     const HTML_BASE_URL = "https://cdn.jsdelivr.net/gh/freebuisness/html@main";
     const COVERS_BASE_URL = "https://cdn.jsdelivr.net/gh/freebuisness/covers@main";
+    const PROGRESS_COOKIE = "fhsProgress";
+    const XP_INTERVAL_MS = 5 * 60 * 1000;
+    const XP_PER_LEVEL = 5;
+    const THEMES = [
+        { id: "default", name: "Default", level: 0, page: "#222", panel: "#333", box: "#444", card: "#333", field: "#111", text: "#fff", secondary: "#eee", muted: "#888", accent: "#00ff00", accentSecondary: "#00ccff", border: "#777", buttonStart: "#00ccff", buttonEnd: "#0066ff", buttonBorder: "#003399", hover: "#009900" },
+        { id: "red", name: "Red", level: 5, page: "#210b0b", panel: "#381313", box: "#501b1b", card: "#381313", field: "#160707", text: "#fff0f0", secondary: "#ffdada", muted: "#c79292", accent: "#ff4b4b", accentSecondary: "#ff9b72", border: "#a84a4a", buttonStart: "#e84747", buttonEnd: "#a91f37", buttonBorder: "#741526", hover: "#b32121" },
+        { id: "neon", name: "Neon", level: 10, page: "#260733", panel: "#470852", box: "#6b0d70", card: "#470852", field: "#190321", text: "#fff2ff", secondary: "#ffd8ff", muted: "#d39ad9", accent: "#ff31d2", accentSecondary: "#39f5ff", border: "#e33be7", buttonStart: "#ff27c8", buttonEnd: "#7b32ff", buttonBorder: "#ff82eb", hover: "#e80bad" },
+        { id: "forest", name: "Forest", level: 15, page: "#0c1c12", panel: "#183522", box: "#234b30", card: "#183522", field: "#08130c", text: "#f0fff2", secondary: "#d5f3d9", muted: "#94b99b", accent: "#72ed8a", accentSecondary: "#a6db71", border: "#527c58", buttonStart: "#63ce75", buttonEnd: "#31894c", buttonBorder: "#226238", hover: "#24723a" },
+        { id: "sunset", name: "Sunset", level: 20, page: "#241326", panel: "#40213c", box: "#5b2e4d", card: "#40213c", field: "#170c1a", text: "#fff2f8", secondary: "#f8d9e8", muted: "#c59ab0", accent: "#ff8fc2", accentSecondary: "#ffc06e", border: "#a05b82", buttonStart: "#f276a8", buttonEnd: "#bd4f7c", buttonBorder: "#863859", hover: "#ae3f6b" },
+        { id: "ocean", name: "Ocean", level: 25, page: "#081923", panel: "#102d3a", box: "#194353", card: "#102d3a", field: "#061117", text: "#edfbff", secondary: "#cceaf2", muted: "#8eb4c0", accent: "#49e0dc", accentSecondary: "#66bfff", border: "#427887", buttonStart: "#42c9d4", buttonEnd: "#287ebd", buttonBorder: "#1d587e", hover: "#1e8a9b" },
+        { id: "lavender", name: "Lavender", level: 30, page: "#171324", panel: "#2b2440", box: "#3d3157", card: "#2b2440", field: "#100d19", text: "#f8f2ff", secondary: "#e6dbfa", muted: "#b2a1cb", accent: "#d6a5ff", accentSecondary: "#9bd5ff", border: "#776292", buttonStart: "#ba8cf0", buttonEnd: "#7168cc", buttonBorder: "#514b9a", hover: "#7651bb" },
+        { id: "gold", name: "Gold", level: 35, page: "#211b0b", panel: "#3a3013", box: "#51431b", card: "#3a3013", field: "#151105", text: "#fff9e6", secondary: "#f5e9c2", muted: "#c4b583", accent: "#ffe066", accentSecondary: "#ffb95e", border: "#9a8242", buttonStart: "#e6c84f", buttonEnd: "#bb842e", buttonBorder: "#80601f", hover: "#a98120" },
+        { id: "midnight", name: "Midnight", level: 40, page: "#101522", panel: "#1b2435", box: "#273449", card: "#1b2435", field: "#090e18", text: "#f2f6ff", secondary: "#d8e1f1", muted: "#9aa9c1", accent: "#91aaff", accentSecondary: "#72e0df", border: "#52647f", buttonStart: "#8199ef", buttonEnd: "#516ac0", buttonBorder: "#384b91", hover: "#465ba8" },
+        { id: "candy", name: "Candy", level: 45, page: "#241126", panel: "#401b3c", box: "#59264f", card: "#401b3c", field: "#170a18", text: "#fff2fc", secondary: "#f7d8f0", muted: "#c39ab9", accent: "#ff8bd6", accentSecondary: "#8de8ff", border: "#9b5b8b", buttonStart: "#ee75c7", buttonEnd: "#9f66df", buttonBorder: "#72479b", hover: "#a947a0" },
+        { id: "emerald", name: "Emerald", level: 50, page: "#071b18", panel: "#10342d", box: "#18483d", card: "#10342d", field: "#041310", text: "#edfff9", secondary: "#c9f1e4", muted: "#8ebcaf", accent: "#59edba", accentSecondary: "#8ee89a", border: "#438276", buttonStart: "#4ed9a2", buttonEnd: "#278c77", buttonBorder: "#1c6256", hover: "#237a65" },
+        { id: "monochrome", name: "Monochrome", level: 55, page: "#171717", panel: "#292929", box: "#3b3b3b", card: "#292929", field: "#0b0b0b", text: "#fff", secondary: "#e5e5e5", muted: "#aaa", accent: "#fff", accentSecondary: "#c8c8c8", border: "#707070", buttonStart: "#777", buttonEnd: "#444", buttonBorder: "#222", hover: "#555" },
+        { id: "aero", name: "Aero", level: 100, page: "#075984", panel: "#83b4cb", box: "#679ebc", card: "#9bc5d5", field: "#c0e0e9", text: "#052b4a", secondary: "#103d58", muted: "#315b72", accent: "#ffbd38", accentSecondary: "#00eaff", border: "#efffff", buttonStart: "#00eaff", buttonEnd: "#176fff", buttonBorder: "#fff", hover: "#ff35b8" }
+    ];
+    const DEFAULT_PROGRESS = { xp: 0, level: 1, playtimeMs: 0, xpRemainderMs: 0, themeId: "default" };
+    let progress = loadProgress();
+    let lastProgressTick = Date.now();
+    let lastProgressSave = lastProgressTick;
+    let xpNotificationTimeout;
+    let levelUpBarTimeout;
+    let cookieWarningShown = false;
     const gameCards = Array.from(gameList.querySelectorAll(".game-card"));
     let activeGameHtml = "";
     let gameLoadRequest = 0;
@@ -538,6 +980,185 @@
     const enabledGenres = new Set();
     const genreButtons = new Map();
     const compactGenreOrder = ["Action", "Arcade", "Horror", "Platformer", "Puzzle", "Racing", "Sports", "Other"];
+
+    function loadProgress() {
+        const cookie = document.cookie.split(";").map((part) => part.trim())
+            .find((part) => part.startsWith(`${PROGRESS_COOKIE}=`));
+        if (!cookie) return { ...DEFAULT_PROGRESS };
+
+        try {
+            const saved = JSON.parse(decodeURIComponent(cookie.slice(PROGRESS_COOKIE.length + 1)));
+            if (
+                !Number.isSafeInteger(saved.xp) || saved.xp < 0 ||
+                !Number.isSafeInteger(saved.playtimeMs) || saved.playtimeMs < 0 ||
+                typeof saved.themeId !== "string"
+            ) {
+                throw new Error("Saved progress has an invalid format");
+            }
+
+            const level = Math.floor(saved.xp / XP_PER_LEVEL) + 1;
+            const theme = THEMES.find((item) => item.id === saved.themeId);
+            return {
+                xp: saved.xp,
+                level,
+                playtimeMs: saved.playtimeMs,
+                xpRemainderMs: Number.isSafeInteger(saved.xpRemainderMs) && saved.xpRemainderMs >= 0
+                    ? saved.xpRemainderMs % XP_INTERVAL_MS
+                    : saved.playtimeMs % XP_INTERVAL_MS,
+                themeId: theme && theme.level <= level ? theme.id : "default"
+            };
+        } catch (error) {
+            console.error("Could not read saved level progress:", error);
+            return { ...DEFAULT_PROGRESS };
+        }
+    }
+
+    function saveProgress() {
+        const saved = {
+            xp: progress.xp,
+            level: progress.level,
+            playtimeMs: Math.floor(progress.playtimeMs),
+            xpRemainderMs: Math.floor(progress.xpRemainderMs),
+            themeId: progress.themeId
+        };
+        document.cookie = `${PROGRESS_COOKIE}=${encodeURIComponent(JSON.stringify(saved))}; Path=/; Max-Age=31536000; SameSite=Lax`;
+        if (
+            !document.cookie.split(";").map((part) => part.trim())
+                .some((part) => part.startsWith(`${PROGRESS_COOKIE}=`)) &&
+            !cookieWarningShown
+        ) {
+            cookieWarningShown = true;
+            console.error("Could not save level progress because cookies are unavailable.");
+        }
+    }
+
+    function applyTheme() {
+        const theme = THEMES.find((item) => item.id === progress.themeId) || THEMES[0];
+        document.body.dataset.theme = theme.id;
+        const variables = {
+            "--page-bg": theme.page,
+            "--panel-bg": theme.panel,
+            "--box-bg": theme.box,
+            "--card-bg": theme.card,
+            "--field-bg": theme.field,
+            "--text-color": theme.text,
+            "--secondary-text": theme.secondary,
+            "--muted-text": theme.muted,
+            "--accent-color": theme.accent,
+            "--accent-secondary": theme.accentSecondary,
+            "--border-color": theme.border,
+            "--button-start": theme.buttonStart,
+            "--button-end": theme.buttonEnd,
+            "--button-border": theme.buttonBorder,
+            "--hover-color": theme.hover
+        };
+        Object.entries(variables).forEach(([name, value]) => document.body.style.setProperty(name, value));
+    }
+
+    function formatPlaytime(milliseconds) {
+        const totalMinutes = Math.floor(milliseconds / 60000);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+    }
+
+    function updateLevelSummary() {
+        levelSummary.textContent =
+            `Level ${progress.level} · ${progress.xp} XP earned · ${progress.level - 1} levels earned · Playtime ${formatPlaytime(progress.playtimeMs)}`;
+        const xpIntoLevel = progress.xp % XP_PER_LEVEL;
+        levelProgress.textContent = `${xpIntoLevel} / ${XP_PER_LEVEL} XP toward Level ${progress.level + 1}`;
+    }
+
+    function showXpNotification(earnedXp, leveledUp, levelsGained = 1) {
+        const xpIntoLevel = progress.xp % XP_PER_LEVEL;
+        const displayedProgress = leveledUp ? XP_PER_LEVEL : xpIntoLevel;
+        xpNotificationLabel.textContent = levelsGained > 1
+            ? `${levelsGained} LEVELS GAINED · +${earnedXp} XP`
+            : leveledUp
+                ? `LEVEL ${progress.level} REACHED · +${earnedXp} XP`
+                : `+${earnedXp} XP · LEVEL ${progress.level}`;
+        xpBattery.setAttribute(
+            "aria-label",
+            `Level ${progress.level}: ${displayedProgress} of ${XP_PER_LEVEL} XP`
+        );
+        Array.from(xpBattery.children).forEach((segment, index) => {
+            segment.classList.toggle("is-filled", index < displayedProgress);
+        });
+        xpNotification.classList.add("is-visible");
+        xpNotification.setAttribute("aria-hidden", "false");
+
+        window.clearTimeout(xpNotificationTimeout);
+        window.clearTimeout(levelUpBarTimeout);
+        if (leveledUp) {
+            levelUpBarTimeout = window.setTimeout(() => {
+                Array.from(xpBattery.children).forEach((segment, index) => {
+                    segment.classList.toggle("is-filled", index < xpIntoLevel);
+                });
+                xpBattery.setAttribute(
+                    "aria-label",
+                    `Level ${progress.level}: ${xpIntoLevel} of ${XP_PER_LEVEL} XP`
+                );
+            }, 900);
+        }
+        xpNotificationTimeout = window.setTimeout(() => {
+            xpNotification.classList.remove("is-visible");
+            xpNotification.setAttribute("aria-hidden", "true");
+        }, 5000);
+    }
+
+    function renderThemeOptions() {
+        themeList.replaceChildren();
+        THEMES.forEach((theme) => {
+            const unlocked = progress.level >= theme.level;
+            const selected = progress.themeId === theme.id;
+            const option = document.createElement("button");
+            option.className = "theme-option";
+            option.type = "button";
+            option.disabled = !unlocked;
+            option.setAttribute("aria-pressed", String(selected));
+            option.dataset.themeId = theme.id;
+            option.textContent =
+                `${theme.name} Theme: ${theme.level === 0 ? "Free" : `Level ${theme.level}`}${selected ? " - Selected" : ""}`;
+            option.style.setProperty("--option-bg", theme.panel);
+            option.style.setProperty("--option-text", theme.text);
+            option.style.setProperty("--option-accent", theme.accentSecondary);
+            option.addEventListener("click", () => {
+                if (progress.level < theme.level) return;
+                progress.themeId = theme.id;
+                applyTheme();
+                updateLevelSummary();
+                renderThemeOptions();
+                saveProgress();
+            });
+            themeList.appendChild(option);
+        });
+    }
+
+    function updatePlaytime() {
+        const now = Date.now();
+        const elapsedMs = Math.max(0, now - lastProgressTick);
+        progress.playtimeMs += elapsedMs;
+        progress.xpRemainderMs += elapsedMs;
+        lastProgressTick = now;
+        const previousLevel = progress.level;
+        const earnedXp = Math.floor(progress.xpRemainderMs / XP_INTERVAL_MS);
+        progress.xpRemainderMs %= XP_INTERVAL_MS;
+        progress.xp += earnedXp;
+        progress.level = Math.floor(progress.xp / XP_PER_LEVEL) + 1;
+        updateLevelSummary();
+
+        if (earnedXp > 0) {
+            showXpNotification(earnedXp, progress.level > previousLevel);
+        }
+        if (progress.level !== previousLevel && levelDialog.open) {
+            renderThemeOptions();
+        }
+
+        if (now - lastProgressSave >= 15000) {
+            saveProgress();
+            lastProgressSave = now;
+        }
+    }
 
     function getGameGenre(name, metadata) {
         const providedGenre = Array.isArray(metadata) ? metadata[0] : metadata;
@@ -690,7 +1311,6 @@
         viewerTitle.textContent = name;
         viewerStatus.textContent = "Loading game...";
         openGameTabButton.disabled = true;
-        viewerFrame.srcdoc = "<!doctype html><html><body></body></html>";
         viewerOverlay.classList.add("is-open");
         closeGameButton.focus();
 
@@ -811,7 +1431,23 @@
         renderGames();
     }
 
-    searchInput.addEventListener("input", renderGames);
+    searchInput.addEventListener("input", () => {
+        if (searchInput.value === "FreeLevel100") {
+            const previousLevel = progress.level;
+            const levelsGained = 100;
+            const earnedXp = levelsGained * XP_PER_LEVEL;
+            progress.xp += earnedXp;
+            progress.level = Math.floor(progress.xp / XP_PER_LEVEL) + 1;
+            updateLevelSummary();
+            showXpNotification(earnedXp, true, progress.level - previousLevel);
+            if (levelDialog.open) {
+                renderThemeOptions();
+            }
+            saveProgress();
+            lastProgressSave = Date.now();
+        }
+        renderGames();
+    });
     toggleAllGenresButton.addEventListener("click", () => {
         const expanded = genreFilters.classList.toggle("show-all");
         toggleAllGenresButton.setAttribute("aria-expanded", String(expanded));
@@ -860,7 +1496,28 @@
             closeGame();
         }
     });
+    openLevelDialogButton.addEventListener("click", () => {
+        updatePlaytime();
+        renderThemeOptions();
+        levelDialog.showModal();
+    });
+    closeLevelDialogButton.addEventListener("click", () => levelDialog.close());
+    levelDialog.addEventListener("click", (event) => {
+        if (event.target === levelDialog) levelDialog.close();
+    });
+    document.addEventListener("pagehide", () => {
+        updatePlaytime();
+        saveProgress();
+    });
 
+    applyTheme();
+    updateLevelSummary();
+    renderThemeOptions();
+    for (let index = 0; index < XP_PER_LEVEL; index += 1) {
+        xpBattery.appendChild(document.createElement("span")).className = "xp-battery-segment";
+    }
+    saveProgress();
+    window.setInterval(updatePlaytime, 1000);
     renderGames();
     loadOnlineGames();
 
